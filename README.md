@@ -1,16 +1,34 @@
-# React + Vite
+# WRAITH — Proof of Silence Protocol
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Your silence is your reputation.
 
-Currently, two official plugins are available:
+WRAITH is a privacy reputation system for AI agents built on 0G's modular infrastructure. Instead of proving what your agent did, WRAITH proves what it chose **not** to expose.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
+🌐 [wraith.dingidingi.site](https://wraith.dingidingi.site)
 
-## React Compiler
+## What is WRAITH?
+Every time an AI agent handles sensitive data — wallet correlations, trading intent, identity fragments — inside a Trusted Execution Environment (TEE), WRAITH generates a cryptographic **Silence Proof** and stores it permanently on 0G Storage. Your Agent ID accumulates these proofs, building an on-chain reputation based entirely on discretion.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 0G Components Used
+- **0G Storage** — Permanent archival of Silence Proofs (Log + KV layer)
+- **0G Compute (TEE)** — Hardware-enforced private inference execution
+- **Agent ID** — Sovereign on-chain identity with encrypted metadata
+- **0G Chain** — Proof hash verification and Silence Score updates
 
-## Expanding the ESLint configuration
+## Track
+Track 5 — Privacy & Sovereign Infrastructure | 0G APAC Hackathon 2026
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Architecture
+## Smart Contracts (0G Chain)
+- `WraithAgentID.sol` — ERC-721 Agent ID token with Silence Score
+- `SilenceProofRegistry.sol` — Immutable proof hash registry
+- `ReputationScorer.sol` — On-chain score calculation
+
+## Tech Stack
+- React + Vite frontend
+- Deployed on Ubuntu VPS via PM2 + Nginx + SSL
+- 0G Storage SDK, 0G Compute, Agent ID
+
+## Builder
+Built by [@kane_120](https://x.com/kane_120) for the 0G APAC Hackathon
