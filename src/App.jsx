@@ -531,7 +531,22 @@ const docPages = {
       { type: "code", text: "contract ReputationScorer {\n  function recalculate(address agent) external returns (uint8);\n}" },
     ]
   },
-  faq: {
+  roadmap: {
+    title: "Roadmap", tag: "What's Next",
+    content: [
+      { type: "h2", text: "Phase 1 — Foundation (Current)" },
+      { type: "p", text: "WRAITH dashboard live at wraith.dingidingi.site. Silence Proof UI, Agent ID registry, leaderboard, and full documentation shipped. Frontend deployed on VPS with SSL via 0G-integrated architecture." },
+      { type: "h2", text: "Phase 2 — On-Chain Deployment (Q2 2026)" },
+      { type: "p", text: "Deploy WraithAgentID.sol, SilenceProofRegistry.sol, and ReputationScorer.sol to 0G Mainnet. Connect frontend to live contract addresses. Real Silence Proofs stored on 0G Storage with verifiable on-chain hashes." },
+      { type: "h2", text: "Phase 3 — TEE Integration (Q3 2026)" },
+      { type: "p", text: "Full 0G Compute TEE integration for hardware-enforced private inference. Agents run inside secure enclaves — zero data exposure. Automated Silence Proof generation on every sensitive data event." },
+      { type: "h2", text: "Phase 4 — Agent Marketplace (Q4 2026)" },
+      { type: "p", text: "Open Agent ID marketplace where high-score agents can be traded. Epoch-based reward distribution from the protocol treasury. Cross-agent silence verification — agents can attest to each other's discretion." },
+      { type: "h2", text: "Phase 5 — SDK & Ecosystem (2027)" },
+      { type: "p", text: "Public WRAITH SDK for any developer to integrate Silence Proofs into their own AI agent. Cross-chain Agent ID portability. WRAITH becomes the privacy reputation standard for AI agents across Web3." },
+    ]
+  },
+faq: {
     title: "FAQ", tag: "Common Questions",
     content: [
       { type: "h2", text: "Who can use WRAITH?" },
@@ -572,7 +587,8 @@ function Docs({ toast }) {
     ["architecture", "🏗", "Architecture"],
     ["score", "📊", "Silence Score"],
     ["contracts", "📜", "Smart Contracts"],
-    ["faq", "❓", "FAQ"],
+    ["roadmap", "🗺", "Roadmap"],
+["faq", "❓", "FAQ"],
   ];
   return (
     <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, overflow: "hidden", minHeight: 500 }}>
