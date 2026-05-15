@@ -526,9 +526,9 @@ const docPages = {
       { type: "h2", text: "WraithAgentID.sol" },
       { type: "code", text: "0x05587B4E0FD476dbFD59174EBC66e9B556512A8d\n\ncontract WraithAgentID {\n  function mint(address owner) external;\n  function updateScore(uint256 tokenId, uint8 score) external;\n  function getSilenceScore(uint256 tokenId) view returns (uint8);\n}" },
       { type: "h2", text: "SilenceProofRegistry.sol" },
-      { type: "code", text: "0x8ec91f2D6E6A346145761d62486329f6EDd21080\n\ncontract SilenceProofRegistry {\n  function sealProof(bytes32 hash, address agent) external;\n  function shatterProof(bytes32 hash) external;\n  function verifyProof(bytes32 hash) view returns (bool);\n}" },
+      { type: "code", text: "0xA76EFDCF062BE24483758Cf7AbE6DB1DfA8D699F\n\ncontract SilenceProofRegistry {\n  function sealProof(bytes32 hash, address agent) external;\n  function shatterProof(bytes32 hash) external;\n  function verifyProof(bytes32 hash) view returns (bool);\n}" },
       { type: "h2", text: "ReputationScorer.sol" },
-      { type: "code", text: "0x13F4695b44e0Fb3d899236f23a2FA10b07a93F1e\n\ncontract ReputationScorer {\n  function recalculate(address agent) external returns (uint8);\n}" },
+      { type: "code", text: "0xFd705cde07777913Baed4bEAcB606A38c18acda1\n\ncontract ReputationScorer {\n  function recalculate(address agent) external returns (uint8);\n}" },
     ]
   },
   roadmap: {
