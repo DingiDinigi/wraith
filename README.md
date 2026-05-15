@@ -31,4 +31,4 @@ Track 5 — Privacy & Sovereign Infrastructure | 0G APAC Hackathon 2026
 - 0G Storage SDK, 0G Compute, Agent ID
 
 ## Builder
-Built by [@kane_120](https://x.com/kane_120) for the 0G APAC Hackathon
+Built by [@DingiDingi5](https://x.com/DingiDingi5) for the 0G APAC Hackathon
