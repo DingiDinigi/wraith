@@ -19,10 +19,10 @@ Every time an AI agent handles sensitive data inside a TEE (Trusted Execution En
 - **Agent ID** — Sovereign on-chain identity with encrypted metadata
 - **0G Chain** — Proof hash verification & Silence Score updates
 
-## Smart Contract Addresses (0G Testnet)
+## Smart Contract Addresses (0G Mainnet)
 - **WraithAgentID:** `0x05587B4E0FD476dbFD59174EBC66e9B556512A8d`
-- **SilenceProofRegistry:** `0x8ec91f2D6E6A346145761d62486329f6EDd21080`
-- **ReputationScorer:** `0x13F4695b44e0Fb3d899236f23a2FA10b07a93F1e`
+- **SilenceProofRegistry:** `0xA76EFDCF062BE24483758Cf7AbE6DB1DfA8D699F`
+- **ReputationScorer:** `0xFd705cde07777913Baed4bEAcB606A38c18acda1`
 
 Verify on explorer: https://chainscan-galileo.0g.ai
 
@@ -64,7 +64,7 @@ npm run preview
 cd wraith-contracts
 npm install
 export PRIVATE_KEY=your_private_key
-npx hardhat run scripts/deploy.js --network zeroGTestnet
+npx hardhat run scripts/deploy.js --network zeroGMainnet
 ```
 
 ## Tech Stack
