@@ -77,3 +77,6 @@ Track 5 — Privacy & Sovereign Infrastructure | 0G APAC Hackathon 2026
 
 ## Builder
 Built by [@DingiDingi5](https://x.com/DingiDingi5) for the 0G APAC Hackathon
+
+## Mint Your Agent ID
+Connect your wallet at wraith.dingidingi.site and click **Mint Agent ID** to register on 0G Mainnet. Your Agent ID token will accumulate Silence Proofs and build your on-chain privacy reputation.

@@ -9,7 +9,7 @@ const C = {
 };
 
 const LINKS = {
-  explorer: "https://chainscan.0g.ai",
+  explorer: "https://chainscan-galileo.0g.ai",
   storage: "https://storagescan-newton.0g.ai",
   compute: "https://0g.ai",
   github: "https://github.com/DingiDinigi/wraith",
@@ -105,22 +105,22 @@ function Hero({ onEnter }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", background: C.bg, overflow: "hidden", padding: "20px" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", background: C.bg, overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
       <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 40%,rgba(168,85,247,0.15) 0%,transparent 70%)" }} />
 
       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 32px" }}>
         <div style={{ fontFamily: "Space Mono,monospace", fontSize: 11, letterSpacing: 4, color: C.purpleLight, textTransform: "uppercase", marginBottom: 24, opacity: 0.8 }}>Proof of Silence Protocol</div>
 
-        <h1 style={{ fontSize: "clamp(32px, 8vw, 72px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: -2, color: "#fff", marginBottom: 12, maxWidth: 700, textAlign: "center" }}>
+        <h1 style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -3, color: "#fff", marginBottom: 12, maxWidth: 700 }}>
           Your silence<br />is your <span style={{ color: C.purple }}>reputation.</span>
         </h1>
 
-        <p style={{ fontSize: "clamp(13px, 2vw, 16px)", color: C.text2, maxWidth: 520, lineHeight: 1.7, marginBottom: 32, textAlign: "center" }}>
+        <p style={{ fontSize: 16, color: C.text2, maxWidth: 520, lineHeight: 1.7, marginBottom: 48 }}>
           WRAITH generates cryptographic Silence Proofs every time your agent handles sensitive data without leaking it — stored permanently on 0G, sealed by TEE.
         </p>
 
-        <div style={{ width: "clamp(180px, 40vw, 260px)", height: "clamp(180px, 40vw, 260px)", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 48 }}>
+        <div style={{ width: 260, height: 260, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 48 }}>
           {[130, 97, 65].map((r, i) => (
             <div key={i} style={{ position: "absolute", width: r * 2, height: r * 2, borderRadius: "50%", border: `1px solid rgba(168,85,247,${0.15 + i * 0.1})` }} />
           ))}
@@ -133,7 +133,7 @@ function Hero({ onEnter }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap", justifyContent: "center" }}>
+        <div style={{ display: "flex", gap: 16, marginBottom: 32 }}>
           <button onClick={onEnter} style={{ padding: "14px 36px", borderRadius: 10, fontSize: 15, fontWeight: 700, color: "#fff", background: `linear-gradient(135deg,${C.purpleDeep},${C.purpleLight})`, border: "none", cursor: "pointer", letterSpacing: 0.3, transition: "opacity 0.2s" }}
             onMouseEnter={e => e.target.style.opacity = "0.85"}
             onMouseLeave={e => e.target.style.opacity = "1"}>
@@ -146,7 +146,14 @@ function Hero({ onEnter }) {
           </button>
         </div>
 
-
+        <div style={{ display: "flex", gap: 32 }}>
+          {[["Sealed", "Silence Proofs"], ["Verified", "On-Chain"], ["0G", "Mainnet"]].map(([v, l]) => (
+            <div key={l} style={{ textAlign: "center" }}>
+              <div style={{ fontSize: 22, fontWeight: 800, color: "#fff", letterSpacing: -0.5 }}>{v}</div>
+              <div style={{ fontFamily: "Space Mono,monospace", fontSize: 9, color: C.text3, letterSpacing: 1, marginTop: 4 }}>{l}</div>
+            </div>
+          ))}
+        </div>
 
         <div style={{ position: "absolute", bottom: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 6, animation: "bounce 2s ease-in-out infinite" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, animation: "slideRight 1.5s ease-in-out infinite" }}>
@@ -185,7 +192,7 @@ function Dashboard({ toast }) {
 
   return (
     <div>
-      <div style={{ display: "grid", gridTemplateColumns: "min(300px, 100%) 1fr", gap: 20, marginBottom: 20 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 20, marginBottom: 20 }}>
         <Card>
           <div style={{ width: 200, height: 200, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
             {[100, 75, 50].map((r, i) => (
@@ -218,7 +225,7 @@ function Dashboard({ toast }) {
           </div>
         </Card>
 
-        <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
           <AnimatedStatCard label="Sealed Proofs" value={142} unit=" proofs" sub="+12 this epoch" subColor={C.green} delay={0} />
           <AnimatedStatCard label="Events Handled" value={1847} unit=" total" sub="0 leaks detected" delay={100} />
           <AnimatedStatCard label="TEE Executions" value={98} unit="%" sub="Hardware verified" subColor={C.green} delay={200} />
@@ -283,7 +290,7 @@ function Proofs({ toast }) {
         ))}
       </div>
       <Card style={{ padding: 0, overflow: "hidden" }}>
-        <div className="proof-table-head" style={{ display: "grid", gridTemplateColumns: "18px 180px 1fr 100px 90px", gap: 12, padding: "10px 16px", borderBottom: `1px solid ${C.border2}`, fontFamily: "Space Mono,monospace", fontSize: 9, letterSpacing: 1, color: C.text3, textTransform: "uppercase" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "18px 180px 1fr 100px 90px", gap: 12, padding: "10px 16px", borderBottom: `1px solid ${C.border2}`, fontFamily: "Space Mono,monospace", fontSize: 9, letterSpacing: 1, color: C.text3, textTransform: "uppercase" }}>
           <div /><div>Hash</div><div>Event</div><div>Time</div><div>Status</div>
         </div>
         {filtered.map((p, i) => (
@@ -319,7 +326,7 @@ function AgentID({ toast }) {
   ];
 
   return (
-    <div className="agentid-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
       <Card delay={0}>
         <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 24, height: 24, borderRadius: 6, background: "rgba(168,85,247,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>👁</div>Identity Record
@@ -406,7 +413,7 @@ function Leaderboard({ toast }) {
   ];
 
   return (
-    <div className="lb-grid" style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 20 }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: 20 }}>
       <div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Global Silence Leaderboard</div>
@@ -584,8 +591,8 @@ function Docs({ toast }) {
 ["faq", "❓", "FAQ"],
   ];
   return (
-    <div className="docs-layout" style={{ display: "grid", gridTemplateColumns: "220px 1fr", background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, overflow: "hidden", minHeight: 500 }}>
-      <div className="docs-sidebar" style={{ borderRight: `1px solid ${C.border2}`, padding: "20px 0" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, overflow: "hidden", minHeight: 500 }}>
+      <div style={{ borderRight: `1px solid ${C.border2}`, padding: "20px 0" }}>
         <div style={{ fontFamily: "Space Mono,monospace", fontSize: 9, letterSpacing: 2, color: C.text3, textTransform: "uppercase", padding: "0 16px", marginBottom: 10 }}>WRAITH Protocol</div>
         {navItems.map(([key, icon, label]) => (
           <div key={key} onClick={() => setActive(key)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "9px 16px", fontSize: 12, color: active === key ? C.purpleLight : C.text2, cursor: "pointer", borderLeft: active === key ? `2px solid ${C.purple}` : "2px solid transparent", background: active === key ? "rgba(168,85,247,0.08)" : "transparent", transition: "all 0.2s" }}
@@ -615,29 +622,32 @@ export default function App() {
 
   const toast = (msg) => { setToastMsg(msg); setToastShow(true); setTimeout(() => setToastShow(false), 3000); };
 
-  const mintAgentID = async () => {
-    if (!wallet) { toast("Connect wallet first"); return; }
-    try {
-      const { ethers } = await import("ethers");
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const abi = ["function mint() external returns (uint256)"];
-      const contract = new ethers.Contract("0x05587B4E0FD476dbFD59174EBC66e9B556512A8d", abi, signer);
-      toast("Minting Agent ID on 0G Mainnet...");
-      const tx = await contract.mint();
-      await tx.wait();
-      toast("Agent ID minted! Welcome to WRAITH");
-    } catch (e) {
-      toast("Mint failed: " + (e.reason || e.message || "error"));
-    }
-  };
-
   const connectWallet = async () => {
     if (window.ethereum) {
       const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
       setWallet(accounts[0]);
       toast(`Connected: ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`);
     } else { toast("Please install MetaMask"); }
+  };
+
+  const mintAgentID = async () => {
+    if (!wallet) { toast("Connect wallet first"); return; }
+    try {
+      const provider = new (await import("ethers")).ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const abi = ["function mint() external returns (uint256)"];
+      const contract = new (await import("ethers")).ethers.Contract(
+        "0x05587B4E0FD476dbFD59174EBC66e9B556512A8d",
+        abi,
+        signer
+      );
+      toast("Minting your Agent ID on 0G Mainnet...");
+      const tx = await contract.mint();
+      await tx.wait();
+      toast("Agent ID minted! Welcome to WRAITH 👁");
+    } catch (e) {
+      toast("Mint failed: " + (e.reason || e.message || "unknown error"));
+    }
   };
 
   const tabs = [
@@ -660,50 +670,14 @@ export default function App() {
   return (
     <div style={{ display: "flex", height: "100vh", position: "relative", background: C.bg }}>
       <style>{`
-        @media (max-width: 768px) {
-          .wraith-sidebar { display: none !important; }
-          .wraith-main { width: 100vw !important; }
-          .wraith-content { padding: 12px !important; }
-        }
         @keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 8px rgba(168,85,247,0.4); } 50% { box-shadow: 0 0 20px rgba(168,85,247,0.8); } }
         @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-        @media (max-width: 768px) {
-          .ws { display: none !important; }
-          .wm { width: 100vw !important; }
-          .wb { display: flex !important; }
-          .wc { padding: 12px 10px 80px !important; }
-          .dash-grid { grid-template-columns: 1fr !important; }
-          .stats-grid { grid-template-columns: 1fr 1fr !important; }
-          .lb-grid { grid-template-columns: 1fr !important; }
-          .agentid-grid { grid-template-columns: 1fr !important; }
-          .docs-layout { grid-template-columns: 1fr !important; }
-          .docs-sidebar { display: none !important; }
-          .proof-table-head { display: none !important; }
-          .proof-row-grid { grid-template-columns: 1fr auto !important; gap: 6px !important; }
-        }
-        @media (min-width: 769px) { .wb { display: none !important; } }
-        .wb {
-          position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
-          background: rgba(7,7,15,0.98);
-          border-top: 1px solid rgba(168,85,247,0.2);
-          justify-content: space-around; align-items: center;
-          padding: 8px 0 16px; backdrop-filter: blur(20px); display: none;
-        }
-        .wbn {
-          display: flex; flex-direction: column; align-items: center; gap: 4px;
-          cursor: pointer; border: none; background: transparent;
-          color: rgba(240,236,255,0.4); font-size: 9px;
-          font-family: Courier New,monospace; letter-spacing: 1px; min-width: 54px;
-          padding: 4px;
-        }
-        .wbn.on { color: #c084fc; }
-        .wbn span { font-size: 22px; line-height: 1.2; }
       `}</style>
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, background: "radial-gradient(ellipse 70% 50% at 50% 0%,rgba(168,85,247,0.12) 0%,transparent 70%)" }} />
 
-      <aside className="wraith-sidebar" style={{ width: 220, flexShrink: 0, background: "rgba(13,13,26,0.95)", borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", backdropFilter: "blur(20px)", padding: "0 0 24px", position: "relative", zIndex: 10, minWidth: 0 }}>
+      <aside style={{ width: 220, flexShrink: 0, background: "rgba(13,13,26,0.95)", borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", backdropFilter: "blur(20px)", padding: "0 0 24px", position: "relative", zIndex: 10 }}>
         <div style={{ padding: "22px 20px 18px", borderBottom: `1px solid ${C.border2}`, display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }} onClick={() => setView("hero")}>
           <div style={{ width: 32, height: 32, borderRadius: 8, background: `linear-gradient(135deg,${C.purpleDeep},${C.pink})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 800, color: "#fff", animation: "pulseGlow 3s ease-in-out infinite" }}>W</div>
           <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", letterSpacing: -0.5 }}>WR<span style={{ color: C.purpleLight }}>AI</span>TH</div>
@@ -738,7 +712,7 @@ export default function App() {
         </div>
       </aside>
 
-      <div className="wraith-main" style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative", zIndex: 1 }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden", position: "relative", zIndex: 1 }}>
         <div style={{ padding: "0 28px", height: 58, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: `1px solid ${C.border2}`, background: "rgba(7,7,15,0.8)", backdropFilter: "blur(20px)", flexShrink: 0 }}>
           <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>{titles[tab]}</div>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -751,10 +725,14 @@ export default function App() {
               onMouseLeave={e => e.target.style.opacity = "1"}>
               {wallet ? `${wallet.slice(0, 6)}...${wallet.slice(-4)}` : "Connect Wallet"}
             </button>
-            {wallet && <button onClick={mintAgentID} style={{ fontFamily: "Space Mono,monospace", fontSize: 10, color: "#fff", background: "linear-gradient(135deg,#34d399,#059669)", border: "none", padding: "6px 14px", borderRadius: 8, cursor: "pointer" }} onMouseEnter={e => e.target.style.opacity = "0.85"} onMouseLeave={e => e.target.style.opacity = "1"}>Mint Agent ID</button>}
+            {wallet && <button onClick={mintAgentID} style={{ fontFamily: "Space Mono,monospace", fontSize: 10, color: "#fff", background: `linear-gradient(135deg,${C.green},#059669)`, border: "none", padding: "6px 14px", borderRadius: 8, cursor: "pointer", transition: "opacity 0.2s" }}
+              onMouseEnter={e => e.target.style.opacity = "0.85"}
+              onMouseLeave={e => e.target.style.opacity = "1"}>
+              Mint Agent ID ↗
+            </button>
           </div>
         </div>
-        <div key={tab} className="wc" style={{ flex: 1, overflowY: "auto", padding: "16px 12px 32px", animation: "slideIn 0.35s ease", overflowX: "hidden" }}>
+        <div key={tab} style={{ flex: 1, overflowY: "auto", padding: "24px 28px 32px", animation: "slideIn 0.35s ease" }}>
           {tab === "dashboard" && <Dashboard toast={toast} />}
           {tab === "proofs" && <Proofs toast={toast} />}
           {tab === "agentid" && <AgentID toast={toast} />}
@@ -763,19 +741,6 @@ export default function App() {
         </div>
       </div>
       <Toast msg={toastMsg} show={toastShow} />
-      <div className="wb">
-        {[
-          {id:"dashboard",icon:"📊",label:"Home"},
-          {id:"proofs",icon:"🔒",label:"Proofs"},
-          {id:"agentid",icon:"👁",label:"Agent"},
-          {id:"leaderboard",icon:"🏆",label:"Ranks"},
-          {id:"docs",icon:"📖",label:"Docs"}
-        ].map(t=>(
-          <button key={t.id} className={`wbn${tab===t.id?" on":""}`} onClick={()=>setTab(t.id)}>
-            <span>{t.icon}</span>{t.label}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
