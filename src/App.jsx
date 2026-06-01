@@ -606,6 +606,121 @@ function Docs({ toast }) {
   );
 }
 
+function Agent001({ toast }) {
+  const [wallet, setWallet] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+
+  const analyse = async () => {
+    if (!wallet || wallet.length < 10) { toast("Enter a valid wallet address"); return; }
+    setLoading(true);
+    setResult(null);
+    setError(null);
+    try {
+      const res = await fetch("https://wraith.dingidingi.site/agent/analyse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ walletAddress: wallet })
+      });
+      const data = await res.json();
+      if (data.success) setResult(data);
+      else setError(data.error || "Analysis failed");
+    } catch (e) {
+      setError("Could not reach AGENT-001. Try again.");
+    }
+    setLoading(false);
+  };
+
+  return (
+    <div>
+      <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, padding: "24px", marginBottom: 20, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg,transparent,${C.purple},transparent)` }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
+          <div style={{ width: 48, height: 48, borderRadius: "50%", background: `radial-gradient(circle at 35% 35%,${C.purpleLight},${C.purpleDeep})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, boxShadow: `0 0 20px rgba(168,85,247,0.6)` }}>👁</div>
+          <div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: "#fff" }}>AGENT-001</div>
+            <div style={{ fontFamily: "Space Mono,monospace", fontSize: 10, color: C.green }}>● Online — 0G Mainnet</div>
+          </div>
+          <div style={{ marginLeft: "auto", fontFamily: "Space Mono,monospace", fontSize: 9, color: C.text3, background: "rgba(168,85,247,0.08)", border: `1px solid ${C.border}`, padding: "4px 10px", borderRadius: 20 }}>PROOF OF SILENCE</div>
+        </div>
+        <div style={{ fontSize: 13, color: C.text2, marginBottom: 20, lineHeight: 1.7 }}>
+          Enter any 0G wallet address. AGENT-001 will analyse it privately — no data stored, no leaks. Every analysis automatically seals a Silence Proof on 0G Chain.
+        </div>
+        <div style={{ display: "flex", gap: 10 }}>
+          <input
+            value={wallet}
+            onChange={e => setWallet(e.target.value)}
+            placeholder="0x... enter wallet address"
+            style={{ flex: 1, background: "rgba(168,85,247,0.06)", border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 14px", fontFamily: "Space Mono,monospace", fontSize: 11, color: C.purpleLight, outline: "none" }}
+          />
+          <button onClick={analyse} disabled={loading} style={{ background: loading ? "rgba(168,85,247,0.3)" : `linear-gradient(135deg,${C.purpleDeep},${C.purpleLight})`, border: "none", borderRadius: 8, padding: "10px 20px", color: "#fff", fontFamily: "Space Mono,monospace", fontSize: 11, cursor: loading ? "not-allowed" : "pointer", whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 8 }}>
+            {loading ? <><span style={{ width: 12, height: 12, border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid #fff", borderRadius: "50%", display: "inline-block", animation: "spin 0.8s linear infinite" }} />Analysing...</> : "Analyse →"}
+          </button>
+        </div>
+      </div>
+
+      {loading && (
+        <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, padding: "32px 24px", marginBottom: 16, textAlign: "center", animation: "pulse 1.5s ease infinite" }}>
+          <div style={{ width: 60, height: 60, borderRadius: "50%", background: `radial-gradient(circle at 35% 35%,${C.purpleLight},${C.purpleDeep})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, margin: "0 auto 16px", boxShadow: `0 0 30px rgba(168,85,247,0.6)`, animation: "pulseGlow 1.5s ease infinite" }}>👁</div>
+          <div style={{ fontFamily: "Space Mono,monospace", fontSize: 11, color: C.purpleLight, marginBottom: 8 }}>AGENT-001 PROCESSING</div>
+          <div style={{ fontSize: 12, color: C.text3, marginBottom: 16 }}>Fetching wallet data from 0G Chain...</div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 6 }}>
+            {[0,1,2].map(i => <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: C.purple, animation: `typingDot 1s ease ${i*0.3}s infinite` }} />)}
+          </div>
+        </div>
+      )}
+
+      {error && <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.25)", borderRadius: 10, padding: "14px 18px", color: C.red, fontSize: 13, marginBottom: 16 }}>{error}</div>}
+
+      {result && (
+        <div style={{ animation: "slideIn 0.4s ease" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16, animation: "fadeSlideUp 0.5s ease" }}>
+            <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "14px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg,transparent,${C.purple},transparent)` }} />
+              <div style={{ fontFamily: "Space Mono,monospace", fontSize: 8, color: C.text3, letterSpacing: 2, marginBottom: 6 }}>OG BALANCE</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>{parseFloat(result.data.balance).toFixed(4)}</div>
+              <div style={{ fontSize: 10, color: C.text3, marginTop: 2 }}>OG tokens</div>
+            </div>
+            <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "14px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg,transparent,${C.green},transparent)` }} />
+              <div style={{ fontFamily: "Space Mono,monospace", fontSize: 8, color: C.text3, letterSpacing: 2, marginBottom: 6 }}>TRANSACTIONS</div>
+              <div style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>{result.data.txCount}</div>
+              <div style={{ fontSize: 10, color: C.text3, marginTop: 2 }}>on-chain txns</div>
+            </div>
+            <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 10, padding: "14px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg,transparent,${C.purpleLight},transparent)` }} />
+              <div style={{ fontFamily: "Space Mono,monospace", fontSize: 8, color: C.text3, letterSpacing: 2, marginBottom: 6 }}>SILENCE PROOF</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: result.proof.sealed ? C.green : C.red }}>{result.proof.sealed ? "✓ SEALED" : "✗ FAILED"}</div>
+              <div style={{ fontSize: 9, color: C.text3, marginTop: 4, fontFamily: "Space Mono,monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{result.proof.hash ? result.proof.hash.slice(0,20) + "..." : "none"}</div>
+            </div>
+          </div>
+
+          <div style={{ background: "rgba(13,13,26,0.9)", border: `1px solid ${C.border}`, borderRadius: 14, padding: "20px", marginBottom: 16, position: "relative", overflow: "hidden", animation: "fadeSlideUp 0.5s ease 0.2s both" }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: `linear-gradient(90deg,transparent,${C.purple},transparent)` }} />
+            <div style={{ position: "absolute", top: 0, left: 0, bottom: 0, width: 1, background: `linear-gradient(to bottom,transparent,${C.purple},transparent)` }} />
+            <div style={{ fontFamily: "Space Mono,monospace", fontSize: 9, color: C.text3, letterSpacing: 2, marginBottom: 12, display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, boxShadow: `0 0 6px ${C.green}`, display: "inline-block" }} />
+              INTELLIGENCE REPORT — AGENT-001
+            </div>
+            <div style={{ fontSize: 13, color: C.text2, lineHeight: 1.8, whiteSpace: "pre-wrap" }}>{result.analysis}</div>
+          </div>
+
+          {result.proof.sealed && (
+            <div style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.2)", borderRadius: 10, padding: "14px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", animation: "fadeSlideUp 0.5s ease 0.4s both" }}>
+              <div>
+                <div style={{ fontFamily: "Space Mono,monospace", fontSize: 9, color: C.green, letterSpacing: 2, marginBottom: 4 }}>SILENCE PROOF ON-CHAIN</div>
+                <div style={{ fontFamily: "Space Mono,monospace", fontSize: 10, color: C.text2 }}>{result.proof.hash}</div>
+              </div>
+              <div onClick={() => window.open(result.proof.explorer, "_blank")} style={{ fontFamily: "Space Mono,monospace", fontSize: 10, color: C.green, cursor: "pointer", whiteSpace: "nowrap", marginLeft: 16 }}>View on Explorer ↗</div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function App() {
   const [view, setView] = useState("hero");
   const [tab, setTab] = useState("dashboard");
@@ -634,10 +749,16 @@ export default function App() {
 
   const connectWallet = async () => {
     if (window.ethereum) {
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      setWallet(accounts[0]);
-      toast(`Connected: ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`);
-    } else { toast("Please install MetaMask"); }
+      try {
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        setWallet(accounts[0]);
+        toast(`Connected: ${accounts[0].slice(0, 6)}...${accounts[0].slice(-4)}`);
+      } catch (e) {
+        toast("Connection rejected");
+      }
+    } else {
+      toast("No wallet detected. Please install MetaMask, Rabby, or any Web3 wallet.");
+    }
   };
 
   const tabs = [
@@ -646,8 +767,9 @@ export default function App() {
     { id: "agentid", label: "Agent ID" },
     { id: "leaderboard", label: "Leaderboard" },
     { id: "docs", label: "Docs" },
+    { id: "agent001", label: "AGENT-001", badge: "NEW" },
   ];
-  const titles = { dashboard: "Overview", proofs: "Silence Proofs", agentid: "Agent ID Registry", leaderboard: "Global Leaderboard", docs: "WRAITH Documentation" };
+  const titles = { dashboard: "Overview", proofs: "Silence Proofs", agentid: "Agent ID Registry", leaderboard: "Global Leaderboard", docs: "WRAITH Documentation", agent001: "AGENT-001 — Wallet Intelligence" };
 
   if (view === "hero") return (
     <>
@@ -668,6 +790,12 @@ export default function App() {
         @keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         @keyframes pulseGlow { 0%,100% { box-shadow: 0 0 8px rgba(168,85,247,0.4); } 50% { box-shadow: 0 0 20px rgba(168,85,247,0.8); } }
         @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.6; transform:scale(0.95); } }
+        @keyframes typingDot { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+        @keyframes fadeSlideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeSlideLeft { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes countUp { from { opacity:0; transform:scale(0.8); } to { opacity:1; transform:scale(1); } }
         @media (max-width: 768px) {
           .ws { display: none !important; }
           .wm { width: 100vw !important; }
@@ -760,6 +888,7 @@ export default function App() {
           {tab === "agentid" && <AgentID toast={toast} />}
           {tab === "leaderboard" && <Leaderboard toast={toast} />}
           {tab === "docs" && <Docs toast={toast} />}
+          {tab === "agent001" && <Agent001 toast={toast} />}
         </div>
       </div>
       <Toast msg={toastMsg} show={toastShow} />
